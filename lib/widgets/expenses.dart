@@ -23,69 +23,34 @@ class _ExpensesState extends State<Expenses> {
       date: DateTime.now(),
       category: Category.leisure,
     ),
-    Expense(
-      title: 'Fantastic 4',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: 'Fantastic 4',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: 'Fantastic 4',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: 'Fantastic 4',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: 'Fantastic 4',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-
-    Expense(
-      title: 'Fantastic 4',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: 'Demo',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: 'Fantastic 4',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
   ];
+  void _showAddExpense() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) =>
+          Column(children: [Text("HEY"), SizedBox(height: 20), Text("Haeeeb")]),
+    );
+  }
+
   @override
   Widget build(context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("Your Lists !"),
-              SizedBox(height: 30),
-              Expanded(child: ExpenseList(_registeredExpenses)),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Expense Tracker"),
+        actions: [
+          IconButton(onPressed: _showAddExpense, icon: Icon(Icons.add)),
+        ],
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 10),
+            Text("Your Lists !"),
+            SizedBox(height: 30),
+            Expanded(child: ExpenseList(_registeredExpenses)),
+          ],
         ),
       ),
     );

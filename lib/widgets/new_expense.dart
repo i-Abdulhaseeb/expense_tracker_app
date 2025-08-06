@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker_app/model/expense.dart';
 
 class NewExpense extends StatefulWidget {
+  NewExpense(this.function1, {super.key});
+  final void Function(String, String, DateTime) function1;
   @override
   State<NewExpense> createState() {
     return _NewExpenseState();
@@ -15,9 +17,9 @@ class _NewExpenseState extends State<NewExpense> {
     _expenseEntered = ans;
   }
 
-  var _moneyWasted = 0;
+  var _moneyWasted = 0.0;
   void saveMoneyWasted(String ans) {
-    _moneyWasted = int.parse(ans);
+    _moneyWasted = double.parse(ans);
   }
 
   void CalendarShow() async {
@@ -99,8 +101,11 @@ class _NewExpenseState extends State<NewExpense> {
               SizedBox(width: 5),
               ElevatedButton(
                 onPressed: () {
-                  print(_expenseEntered);
-                  print(_moneyWasted);
+                  widget.function1(
+                    _expenseEntered,
+                    _moneyWasted.toString(),
+                    _currentDate!,
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,

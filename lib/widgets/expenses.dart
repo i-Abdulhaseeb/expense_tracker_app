@@ -11,22 +11,26 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<Expense> _registeredExpenses = [
-    Expense(
-      title: 'Flutter',
-      amount: 19.99,
-      date: DateTime.now(),
-      category: Category.work,
-    ),
-    Expense(
-      title: 'Fantastic 4',
-      amount: 9.75,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-  ];
+  final List<Expense> _registeredExpenses = [];
+
   void _showAddExpense() {
-    showModalBottomSheet(context: context, builder: (ctx) => NewExpense());
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => NewExpense(addList),
+    );
+  }
+
+  void addList(String t, String a, DateTime DateSelected) {
+    setState(() {
+      _registeredExpenses.add(
+        Expense(
+          title: t,
+          amount: double.parse(a),
+          date: DateSelected,
+          category: Category.food,
+        ),
+      );
+    });
   }
 
   @override

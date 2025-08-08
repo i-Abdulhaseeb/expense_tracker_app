@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker_app/model/expense.dart';
+import 'package:expense_tracker_app/model/expense.dart';
 
 class NewExpense extends StatefulWidget {
   NewExpense(this.function1, {super.key});
@@ -11,15 +12,41 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
+  void submission() {
+    if (_expenseEntered.trim().isEmpty ||
+        _moneyWasted == 0.0 ||
+        _moneyWasted! <= 0 ||
+        _currentDate == null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("Inavlid Input"),
+          content: Text("Submit a valid title , amount , category or Date"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Close"),
+            ),
+          ],
+        ),
+      );
+    } else {
+      widget.function1(_expenseEntered, _moneyWasted.toString(), _currentDate!);
+    }
+  }
+
   var _expenseEntered = '';
   DateTime? _currentDate;
+  Category _selectedCategory = Category.leisure;
   void saveExpense(String ans) {
     _expenseEntered = ans;
   }
 
-  var _moneyWasted = 0.0;
+  double? _moneyWasted;
   void saveMoneyWasted(String ans) {
-    _moneyWasted = double.parse(ans);
+    _moneyWasted = double.tryParse(ans) ?? 0.0;
   }
 
   void CalendarShow() async {
@@ -87,6 +114,26 @@ class _NewExpenseState extends State<NewExpense> {
 
           Row(
             children: [
+              DropdownButton(
+                value: _selectedCategory,
+                items: Category.values
+                    .map(
+                      (category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(category.name.toUpperCase()),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  } else {
+                    setState(() {
+                      _selectedCategory = value;
+                    });
+                  }
+                },
+              ),
               Spacer(),
               ElevatedButton(
                 onPressed: () {
@@ -101,11 +148,7 @@ class _NewExpenseState extends State<NewExpense> {
               SizedBox(width: 5),
               ElevatedButton(
                 onPressed: () {
-                  widget.function1(
-                    _expenseEntered,
-                    _moneyWasted.toString(),
-                    _currentDate!,
-                  );
+                  submission();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,

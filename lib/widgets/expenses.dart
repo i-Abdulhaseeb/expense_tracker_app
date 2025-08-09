@@ -35,7 +35,33 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void deleteExpense(Expense exp) {
-    _registeredExpenses.remove(exp);
+    int index = _registeredExpenses.indexOf(exp);
+    setState(() {
+      _registeredExpenses.remove(exp);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Expense Deleted'),
+        duration: Duration(seconds: 3),
+        action: SnackBarAction(
+          label: 'undo',
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(index, exp);
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget checker() {
+    if (_registeredExpenses.isEmpty) {
+      return Center(child: Text("No Expense Found , Enter Some Expense"));
+    } else {
+      return ExpenseList(_registeredExpenses, deleteExpense);
+    }
   }
 
   @override
@@ -55,7 +81,7 @@ class _ExpensesState extends State<Expenses> {
             SizedBox(height: 10),
             Text("Your Lists !"),
             SizedBox(height: 30),
-            Expanded(child: ExpenseList(_registeredExpenses, deleteExpense)),
+            Expanded(child: checker()),
           ],
         ),
       ),

@@ -15,6 +15,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _showAddExpense() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (ctx) => NewExpense(addList),
     );
@@ -31,6 +32,10 @@ class _ExpensesState extends State<Expenses> {
         ),
       );
     });
+  }
+
+  void deleteExpense(Expense exp) {
+    _registeredExpenses.remove(exp);
   }
 
   @override
@@ -50,7 +55,7 @@ class _ExpensesState extends State<Expenses> {
             SizedBox(height: 10),
             Text("Your Lists !"),
             SizedBox(height: 30),
-            Expanded(child: ExpenseList(_registeredExpenses)),
+            Expanded(child: ExpenseList(_registeredExpenses, deleteExpense)),
           ],
         ),
       ),

@@ -12,6 +12,13 @@ class ExpenseList extends StatelessWidget {
     return ListView.builder(
       itemCount: list.length,
       itemBuilder: (ctx, index) => Dismissible(
+        background: Container(
+          color: Colors.red,
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          alignment: Alignment.centerRight, // Align text to swipe end
+          padding: EdgeInsets.only(right: 20),
+          child: Text("Delete", style: TextStyle(color: Colors.white)),
+        ),
         key: ValueKey(list[index]),
         direction: DismissDirection.endToStart,
         onDismissed: (direction) {

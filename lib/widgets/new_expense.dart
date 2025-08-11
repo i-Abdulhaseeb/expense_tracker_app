@@ -140,10 +140,7 @@ class _NewExpenseState extends State<NewExpense> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  foregroundColor: Colors.white,
-                ),
+
                 child: Text("Cancel"),
               ),
               SizedBox(width: 5),
@@ -151,10 +148,7 @@ class _NewExpenseState extends State<NewExpense> {
                 onPressed: () {
                   submission();
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  foregroundColor: Colors.white,
-                ),
+
                 child: Text("Save"),
               ),
             ],

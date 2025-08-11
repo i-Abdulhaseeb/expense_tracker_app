@@ -72,7 +72,6 @@ class _ExpensesState extends State<Expenses> {
         actions: [
           IconButton(onPressed: _showAddExpense, icon: Icon(Icons.add)),
         ],
-        backgroundColor: Colors.blue,
       ),
       body: Center(
         child: Column(

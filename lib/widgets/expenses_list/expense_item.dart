@@ -9,8 +9,8 @@ class ExpenseItem extends StatelessWidget {
       return Icon(Icons.work);
     } else if (cat == "Category.leisure") {
       return Icon(Icons.tv);
-    } else if (cat == "Category.fun") {
-      return Icon(Icons.videogame_asset);
+    } else if (cat == "Category.food") {
+      return Icon(Icons.fastfood_sharp);
     } else {
       return Icon(Icons.travel_explore);
     }
@@ -23,8 +23,14 @@ class ExpenseItem extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(item.title),
+            Text(
+              item.title,
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge!.copyWith(color: Colors.black),
+            ),
             SizedBox(height: 8),
             Row(
               children: [

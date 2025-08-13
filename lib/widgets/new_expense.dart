@@ -4,7 +4,7 @@ import 'package:expense_tracker_app/model/expense.dart';
 
 class NewExpense extends StatefulWidget {
   NewExpense(this.function1, {super.key});
-  final void Function(String, String, DateTime) function1;
+  final void Function(String, String, DateTime, Category) function1;
   @override
   State<NewExpense> createState() {
     return _NewExpenseState();
@@ -33,7 +33,12 @@ class _NewExpenseState extends State<NewExpense> {
         ),
       );
     } else {
-      widget.function1(_expenseEntered, _moneyWasted.toString(), _currentDate!);
+      widget.function1(
+        _expenseEntered,
+        _moneyWasted.toString(),
+        _currentDate!,
+        _selectedCategory,
+      );
       Navigator.pop(context);
     }
   }

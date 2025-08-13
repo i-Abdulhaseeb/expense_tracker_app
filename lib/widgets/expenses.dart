@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker_app/model/expense.dart';
 import 'package:expense_tracker_app/widgets/expenses_list/expense_list.dart';
 import 'package:expense_tracker_app/widgets/new_expense.dart';
+import 'package:expense_tracker_app/chart/chart.dart';
 
 class Expenses extends StatefulWidget {
   @override
@@ -21,16 +22,17 @@ class _ExpensesState extends State<Expenses> {
     );
   }
 
-  void addList(String t, String a, DateTime DateSelected) {
+  void addList(String t, String a, DateTime DateSelected, Category c1) {
     setState(() {
       _registeredExpenses.add(
         Expense(
           title: t,
           amount: double.parse(a),
           date: DateSelected,
-          category: Category.food,
+          category: c1,
         ),
       );
+      Chart(_registeredExpenses);
     });
   }
 
@@ -78,7 +80,7 @@ class _ExpensesState extends State<Expenses> {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 10),
-            Text("Your Lists !"),
+            if (_registeredExpenses.isNotEmpty) Chart(_registeredExpenses),
             SizedBox(height: 30),
             Expanded(child: checker()),
           ],

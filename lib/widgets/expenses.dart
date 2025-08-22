@@ -68,6 +68,7 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(context) {
+    final widthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text("Expense Tracker"),
@@ -75,17 +76,27 @@ class _ExpensesState extends State<Expenses> {
           IconButton(onPressed: _showAddExpense, icon: Icon(Icons.add)),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(height: 10),
-            if (_registeredExpenses.isNotEmpty) Chart(_registeredExpenses),
-            SizedBox(height: 30),
-            Expanded(child: checker()),
-          ],
-        ),
-      ),
+      body: widthScreen < 500
+          ? Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 10),
+                  if (_registeredExpenses.isNotEmpty)
+                    Chart(_registeredExpenses),
+                  SizedBox(height: 30),
+                  Expanded(child: checker()),
+                ],
+              ),
+            )
+          : Row(
+              children: [
+                if (_registeredExpenses.isNotEmpty)
+                  Expanded(child: Chart(_registeredExpenses)),
+
+                Expanded(child: checker()),
+              ],
+            ),
     );
   }
 }

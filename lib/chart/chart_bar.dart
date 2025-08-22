@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 
 class ChartBar extends StatelessWidget {
-  const ChartBar({super.key, required this.fill});
-
+  const ChartBar({required this.fill, super.key});
   final double fill;
-
   @override
-  Widget build(BuildContext context) {
-    final isDarkMode =
+  Widget build(context) {
+    final isDARKMode =
         MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
+        padding: EdgeInsets.symmetric(horizontal: 4),
         child: FractionallySizedBox(
           heightFactor: fill,
           child: DecoratedBox(
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(8),
-              ),
-              color: isDarkMode
+              borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+              color: isDARKMode
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(
                       context,
-                    ).colorScheme.primary.withValues(alpha: 0.85),
+                    ).colorScheme.primary.withValues(alpha: 0.6),
             ),
           ),
         ),
